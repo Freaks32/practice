@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigInteger;
 import java.util.Scanner;
 
 /**
@@ -34,12 +35,20 @@ public class Problem8 {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner fileScanner = new Scanner(new File("src/main/resources/problem8/inputNumber.txt"));
         String inputNumber = fileScanner.next();
+        throwOnInvalidNumber(inputNumber);
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter # adjacent digits:");
         int numAdjacentDigits = scanner.nextInt();
 
         long largestProductInSeries = largestAdjacentProduct(inputNumber, numAdjacentDigits);
+
+        System.out.println(largestProductInSeries);
+    }
+
+    static void throwOnInvalidNumber(String number) throws NumberFormatException {
+        // Throws NumberFormatException on Invalid Number
+        new BigInteger(number);
     }
 
     public static long largestAdjacentProduct(String number, int numAdjacentDigits) {
