@@ -16,4 +16,13 @@ public class Problem8Test {
         long product = Problem8.largestAdjacentProduct(inputNumber, numAdjacentDigits);
         Assert.assertEquals(5832L, product);
     }
+
+    @Test
+    public void largestAdjacentProductBasic() throws Exception {
+        String inputNumber = "1357986420";
+        int numAdjacentDigits = 2;
+
+        long product = Problem8.largestAdjacentProduct(inputNumber, numAdjacentDigits);
+        Assert.assertEquals(72L, product);
+    }
 }
