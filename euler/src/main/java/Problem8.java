@@ -51,7 +51,31 @@ public class Problem8 {
         new BigInteger(number);
     }
 
+    /**
+     * Current speed is O(n * k) where n = length of number & k = num adjacent digits
+     * <p>
+     * This solution could be improved to O(n) by keeping track of the running product
+     * as we progress across the number. Logic would need to be added to account for
+     * the diminishing power of 0's within the number while tracking the current product
+     *
+     * @param number            the number to be used for characters in the product
+     * @param numAdjacentDigits number of adjacent digits to consider for product
+     * @return the largest adjacent product
+     */
     public static long largestAdjacentProduct(String number, int numAdjacentDigits) {
-        return 0L;
+        char[] charArray = number.toCharArray();
+
+        long maxProduct = 0;
+        for (int i = 0; i < charArray.length - numAdjacentDigits; i++) {
+            long currentProduct = 1;
+            for (int j = 0; j < numAdjacentDigits; j++) {
+                currentProduct *= Character.getNumericValue(charArray[i + j]);
+            }
+            if (currentProduct > maxProduct) {
+                maxProduct = currentProduct;
+            }
+        }
+
+        return maxProduct;
     }
 }
