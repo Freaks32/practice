@@ -32,7 +32,7 @@ import java.util.Scanner;
  */
 public class Problem8 {
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner fileScanner = new Scanner(new File("euler/src/main/resources/problem8/inputNumber.txt"));
+        Scanner fileScanner = new Scanner(new File("src/main/resources/problem8/inputNumber.txt"));
         String inputNumber = fileScanner.next();
 
         Scanner scanner = new Scanner(System.in);
