@@ -21,12 +21,16 @@ public class Problem9 {
 
         Triplet<Integer> pythagoreanTriplet = specialPythagoreanTriplet(x);
 
-        System.out.println("A = " + pythagoreanTriplet.getA());
-        System.out.println("B = " + pythagoreanTriplet.getB());
-        System.out.println("C = " + pythagoreanTriplet.getC());
+        if (pythagoreanTriplet != null) {
+            System.out.println("A = " + pythagoreanTriplet.getA());
+            System.out.println("B = " + pythagoreanTriplet.getB());
+            System.out.println("C = " + pythagoreanTriplet.getC());
 
-        System.out.println("ABC = " + (pythagoreanTriplet.getA() *
-                pythagoreanTriplet.getB() * pythagoreanTriplet.getC()));
+            System.out.println("ABC = " + (pythagoreanTriplet.getA() *
+                    pythagoreanTriplet.getB() * pythagoreanTriplet.getC()));
+        } else {
+            System.out.println("Null");
+        }
     }
 
     public static Triplet<Integer> specialPythagoreanTriplet(int x) {
