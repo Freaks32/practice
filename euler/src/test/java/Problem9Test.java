@@ -7,7 +7,7 @@ import org.junit.Test;
 public class Problem9Test {
     @Test
     public void specialPythagoreanTriplet() throws Exception {
-        Triplet<Integer> pythagoreanTriplet = Problem9.specialPythagoreanTriplet(1000);
+        Triplet<Integer> pythagoreanTriplet = Problem9.specialPythagoreanTriplet(12);
         Assert.assertNotNull(pythagoreanTriplet);
         Assert.assertEquals(Integer.valueOf(3), pythagoreanTriplet.getA());
         Assert.assertEquals(Integer.valueOf(4), pythagoreanTriplet.getB());
