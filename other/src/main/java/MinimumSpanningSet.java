@@ -11,7 +11,7 @@ public class MinimumSpanningSet {
 
     }
 
-    public static <T> List<Tuple<T>> minimumSpanningSet(List<Tuple<T>> inputRanges) {
+    public static <T extends Comparable<? super T>> List<Tuple<T>> minimumSpanningSet(List<Tuple<T>> inputRanges) {
         return null;
     }
 
@@ -22,7 +22,7 @@ public class MinimumSpanningSet {
      * @param <T>   a comparable object
      * @return root node of a SpanningNode binary search tree
      */
-    private static <T> SpanningNode<T> buildBinarySearchTree(List<Tuple<T>> input) {
+    private static <T extends Comparable<? super T>> SpanningNode<T> buildBinarySearchTree(List<Tuple<T>> input) {
         if (input == null || input.size() < 1) {
             return null;
         }
@@ -34,7 +34,7 @@ public class MinimumSpanningSet {
     }
 }
 
-class Tuple<T> {
+class Tuple<T extends Comparable<? super T>> {
     T left;
     T right;
 
@@ -62,7 +62,7 @@ class Tuple<T> {
     }
 }
 
-class SpanningNode<T extends Comparable<T>> {
+class SpanningNode<T extends Comparable<? super T>> {
     SpanningNode<T> leftChild;
     SpanningNode<T> rightChild;
 
