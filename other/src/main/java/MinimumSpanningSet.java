@@ -12,7 +12,7 @@ public class MinimumSpanningSet {
     }
 
     public static List<Tuple<Integer>> minimumSpanningSet(List<Tuple<Integer>> inputRanges) {
-
+        return null;
     }
 }
 
