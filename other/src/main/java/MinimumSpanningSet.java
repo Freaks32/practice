@@ -56,6 +56,11 @@ class SpanningNode<T extends Comparable<T>> {
         this.right = right;
     }
 
+    /**
+     * Adds Tuple Elem to Binary Tree w/ respect to the 'left' element
+     *
+     * @param elem the element to be added to the tree
+     */
     public void addNode(Tuple<T> elem) {
         // elem.left is less than left
         if (elem.left.compareTo(left) < 0) {
