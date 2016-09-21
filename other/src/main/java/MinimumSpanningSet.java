@@ -1,4 +1,4 @@
-import javafx.util.Pair;
+import java.util.List;
 
 /**
  * Minimum Spanning Set
@@ -11,7 +11,35 @@ public class MinimumSpanningSet {
 
     }
 
-    public static List<Pair<Integer>> minimumSpanningSet(List<Pair<Integer>> inputRanges) {
+    public static List<Tuple<Integer>> minimumSpanningSet(List<Tuple<Integer>> inputRanges) {
 
+    }
+}
+
+class Tuple<T> {
+    T min;
+    T max;
+
+    public Tuple(T min, T max) {
+        this.min = min;
+        this.max = max;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tuple<?> tuple = (Tuple<?>) o;
+
+        if (min != null ? !min.equals(tuple.min) : tuple.min != null) return false;
+        return max != null ? max.equals(tuple.max) : tuple.max == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = min != null ? min.hashCode() : 0;
+        result = 31 * result + (max != null ? max.hashCode() : 0);
+        return result;
     }
 }
