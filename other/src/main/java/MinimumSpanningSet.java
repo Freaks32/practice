@@ -43,3 +43,33 @@ class Tuple<T> {
         return result;
     }
 }
+
+class SpanningNode<T extends Comparable<T>> {
+    SpanningNode<T> leftChild;
+    SpanningNode<T> rightChild;
+
+    T left;
+    T right;
+
+    public SpanningNode(T left, T right) {
+        this.left = left;
+        this.right = right;
+    }
+
+    public void addNode(Tuple<T> elem) {
+        // elem.left is less than left
+        if (elem.left.compareTo(left) < 0) {
+            if (leftChild == null) {
+                leftChild = new SpanningNode<>(elem.left, elem.right);
+            } else {
+                leftChild.addNode(elem);
+            }
+        } else {
+            if (rightChild == null) {
+                rightChild = new SpanningNode<>(elem.left, elem.right);
+            } else {
+                rightChild.addNode(elem);
+            }
+        }
+    }
+}
