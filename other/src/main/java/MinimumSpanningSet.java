@@ -17,12 +17,12 @@ public class MinimumSpanningSet {
 }
 
 class Tuple<T> {
-    T min;
-    T max;
+    T left;
+    T right;
 
-    public Tuple(T min, T max) {
-        this.min = min;
-        this.max = max;
+    public Tuple(T left, T right) {
+        this.left = left;
+        this.right = right;
     }
 
     @Override
@@ -32,14 +32,14 @@ class Tuple<T> {
 
         Tuple<?> tuple = (Tuple<?>) o;
 
-        if (min != null ? !min.equals(tuple.min) : tuple.min != null) return false;
-        return max != null ? max.equals(tuple.max) : tuple.max == null;
+        if (left != null ? !left.equals(tuple.left) : tuple.left != null) return false;
+        return right != null ? right.equals(tuple.right) : tuple.right == null;
     }
 
     @Override
     public int hashCode() {
-        int result = min != null ? min.hashCode() : 0;
-        result = 31 * result + (max != null ? max.hashCode() : 0);
+        int result = left != null ? left.hashCode() : 0;
+        result = 31 * result + (right != null ? right.hashCode() : 0);
         return result;
     }
 }
