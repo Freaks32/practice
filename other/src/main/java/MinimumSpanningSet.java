@@ -57,7 +57,7 @@ class SpanningNode<T extends Comparable<T>> {
     }
 
     /**
-     * Adds Tuple Elem to Binary Tree w/ respect to the 'left' element
+     * Adds Tuple Elem to binary search tree w/ respect to the 'left' element
      *
      * @param elem the element to be added to the tree
      */
