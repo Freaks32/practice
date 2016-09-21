@@ -32,6 +32,10 @@ public class MinimumSpanningSet {
         }
         return root;
     }
+
+    private static <T extends Comparable<? super T>> List<Tuple<T>> extractMinimumSpanningSet(SpanningNode<T> bst) {
+        return null;
+    }
 }
 
 class Tuple<T extends Comparable<? super T>> {
