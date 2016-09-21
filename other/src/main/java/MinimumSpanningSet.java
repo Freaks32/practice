@@ -14,6 +14,24 @@ public class MinimumSpanningSet {
     public static <T> List<Tuple<T>> minimumSpanningSet(List<Tuple<T>> inputRanges) {
         return null;
     }
+
+    /**
+     * Constructs a Binary Tree w/ respect to the 'left' parameter of each Tuple element
+     *
+     * @param input list of tuples from which to construct a search binary tree
+     * @param <T>   a comparable object
+     * @return root node of a SpanningNode binary search tree
+     */
+    private static <T> SpanningNode<T> buildBinarySearchTree(List<Tuple<T>> input) {
+        if (input == null || input.size() < 1) {
+            return null;
+        }
+        SpanningNode<T> root = new SpanningNode<>(input.get(0).left, input.get(0).right);
+        for (int index = 1; index < input.size(); index++) {
+            root.addNode(input.get(index));
+        }
+        return root;
+    }
 }
 
 class Tuple<T> {
