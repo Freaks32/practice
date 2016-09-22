@@ -76,6 +76,7 @@ public class SpanningNodeTest {
         Assert.assertEquals(root.rightChild.leftChild, root.successor());
         Assert.assertEquals(root.rightChild, root.rightChild.leftChild.successor());
         Assert.assertEquals(root, root.leftChild.rightChild.successor());
+        Assert.assertEquals(null, root.rightChild.rightChild.successor());
     }
 
 }

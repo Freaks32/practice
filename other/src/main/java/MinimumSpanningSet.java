@@ -120,10 +120,14 @@ class SpanningNode<T extends Comparable<? super T>> {
     }
 
     private SpanningNode<T> successorParent() {
-        if (parent.rightChild == this) {
-            return parent.successorParent();
+        if (parent != null) {
+            if (parent.rightChild == this) {
+                return parent.successorParent();
+            } else {
+                return parent;
+            }
         } else {
-            return parent;
+            return null;
         }
     }
 }
