@@ -67,6 +67,7 @@ class Tuple<T extends Comparable<? super T>> {
 }
 
 class SpanningNode<T extends Comparable<? super T>> {
+    SpanningNode<T> parent;
     SpanningNode<T> leftChild;
     SpanningNode<T> rightChild;
 
@@ -88,12 +89,14 @@ class SpanningNode<T extends Comparable<? super T>> {
         if (elem.left.compareTo(left) < 0) {
             if (leftChild == null) {
                 leftChild = new SpanningNode<>(elem.left, elem.right);
+                leftChild.parent = this;
             } else {
                 leftChild.addNode(elem);
             }
         } else {
             if (rightChild == null) {
                 rightChild = new SpanningNode<>(elem.left, elem.right);
+                rightChild.parent = this;
             } else {
                 rightChild.addNode(elem);
             }
