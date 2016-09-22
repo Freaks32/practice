@@ -13,7 +13,8 @@ public class MinimumSpanningSet {
     }
 
     public static <T extends Comparable<? super T>> List<Tuple<T>> minimumSpanningSet(List<Tuple<T>> inputRanges) {
-        return null;
+        SpanningNode<T> root = buildBinarySearchTree(inputRanges);
+        return extractMinimumSpanningSet(root);
     }
 
     /**
