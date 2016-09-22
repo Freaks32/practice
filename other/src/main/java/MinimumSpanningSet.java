@@ -102,4 +102,28 @@ class SpanningNode<T extends Comparable<? super T>> {
             }
         }
     }
+
+    public SpanningNode<T> firstInSubTree() {
+        if (leftChild != null) {
+            return leftChild.firstInSubTree();
+        } else {
+            return this;
+        }
+    }
+
+    public SpanningNode<T> successor() {
+        if (rightChild != null) {
+            return rightChild.firstInSubTree();
+        } else {
+            return successorParent();
+        }
+    }
+
+    private SpanningNode<T> successorParent() {
+        if (parent.rightChild == this) {
+            return parent.successorParent();
+        } else {
+            return parent;
+        }
+    }
 }
