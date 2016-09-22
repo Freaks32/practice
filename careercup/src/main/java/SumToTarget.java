@@ -1,3 +1,6 @@
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Solution for https://careercup.com/question?id=5739394251096064
  * --
@@ -8,6 +11,18 @@
  */
 public class SumToTarget {
     public static boolean sumToTarget(long[] list1, long[] list2, long target) {
-        
+        // Add all elems of list2 to a Set -- O(n)
+        Set<Long> list2Set = new HashSet<>();
+        for (long elem : list2) {
+            list2Set.add(elem);
+        }
+
+        // Iterate through list1, check for matching pair in list2 -- O(n)
+        for (long elem : list1) {
+            if (list2Set.contains(target - elem)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
