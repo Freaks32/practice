@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +35,32 @@ public class MinimumSpanningSet {
     }
 
     private static <T extends Comparable<? super T>> List<Tuple<T>> extractMinimumSpanningSet(SpanningNode<T> bst) {
-        return null;
+        List<Tuple<T>> minimumSpanningSet = new ArrayList<>();
+
+        if (bst != null) {
+            SpanningNode<T> currentNode = bst.firstInSubTree();
+
+            if (currentNode != null) {
+                T currentSpanStart = currentNode.left;
+                T currentSpanEnd = currentNode.right;
+                do {
+                    if (currentNode.left.compareTo(currentSpanEnd) <= 0) {
+                        if (currentNode.right.compareTo(currentSpanEnd) > 0) {
+                            currentSpanEnd = currentNode.right;
+                        }
+                    } else {
+                        minimumSpanningSet.add(new Tuple<>(currentSpanStart, currentSpanEnd));
+                        currentSpanStart = currentNode.left;
+                        currentSpanEnd = currentNode.right;
+                    }
+                    currentNode = currentNode.successor();
+                } while (currentNode != null);
+                
+                minimumSpanningSet.add(new Tuple<T>(currentSpanStart, currentSpanEnd));
+            }
+        }
+
+        return minimumSpanningSet;
     }
 }
 
