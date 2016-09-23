@@ -1,5 +1,6 @@
 import javafx.util.Pair;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,18 @@ public class MaximumTraffic {
     }
 
     public static List<Pair<Long, Long>> maximumTraffic(List<GraphNode<Long>> graph) {
-        return null;
+        MaximumTraffic helper = new MaximumTraffic(graph);
+
+        List<Pair<Long, Long>> maxTraffic = new ArrayList<>();
+        for (GraphNode<Long> node : graph) {
+            Long maximumForNode = 0L;
+            for (Long neighbor : node.neighbors) {
+                maximumForNode = Math.max(helper.dfsSum(helper.getNode(neighbor), node.value), maximumForNode);
+            }
+            maxTraffic.add(new Pair<>(node.value, maximumForNode));
+        }
+        return maxTraffic;
+    }
 
     /**
      * Does a depth first search on a section of graph to calculate sum of all components (with backtracking to parent)
