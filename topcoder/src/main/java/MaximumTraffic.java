@@ -14,9 +14,9 @@ public class MaximumTraffic {
 
 class GraphNode<T> {
     T value;
-    List<GraphNode<T>> neighbors;
+    List<T> neighbors;
 
-    public GraphNode(T value, List<GraphNode<T>> neighbors) {
+    public GraphNode(T value, List<T> neighbors) {
         this.value = value;
         this.neighbors = neighbors;
     }
