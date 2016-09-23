@@ -9,6 +9,7 @@ import java.util.Map;
  */
 public class MaximumTraffic {
     public static List<Pair<Long, Long>> maximumTraffic(List<GraphNode<Long>> graph) {
+        return null;
     }
 }
 
