@@ -40,7 +40,7 @@ public class ATaleOfThreeCities {
         List<Double> distances = Arrays.asList(minAB, minAC, minBC);
         Collections.sort(distances);
         return distances.get(0) + distances.get(1);
-        return 0D;
+        //return 0D;
     }
 
     private static double getDistance(int x1, int y1, int x2, int y2) {
