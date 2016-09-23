@@ -35,7 +35,7 @@ public class MaximumTraffic {
     /**
      * Does a depth first search on a section of graph to calculate sum of all components (with backtracking to parent)
      *
-     * @param node the node to act as the root of the dfs
+     * @param node      the node to act as the root of the dfs
      * @param parentKey key of the parent to prevent backtracking
      * @return the sum of all populations on the branch
      */
