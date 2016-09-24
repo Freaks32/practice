@@ -33,4 +33,13 @@ public class FibonacciDiv2 {
 
         return Math.min(distanceAbove, n - oneBelow);
     }
+
+    private int getFibonacci(int n) {
+        if (fibonacciLookup.size() <= n) {
+            for (int i = fibonacciLookup.size(); i <= n; i++) {
+                fibonacciLookup.add(fibonacciLookup.get(i - 2) + fibonacciLookup.get(i - 1));
+            }
+        }
+        return fibonacciLookup.get(n);
+    }
 }
