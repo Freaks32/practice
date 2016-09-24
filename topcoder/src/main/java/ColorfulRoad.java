@@ -25,7 +25,10 @@ public class ColorfulRoad {
                         // Calculate total effort to reach j, store if minimum
                         int distance = j - i;
                         int effort = minEffort[i] + (distance * distance);
-                        if (effort < minEffort[j]) {
+                        
+                        if (minEffort[j] == NOT_POSSIBLE) {
+                            minEffort[j] = effort;
+                        } else if (effort < minEffort[j]) {
                             minEffort[j] = effort;
                         }
                     }
