@@ -24,12 +24,7 @@ public class FibonacciDiv2 {
         int oneBelow = fibonacciLookup.get(i - 1);
         int oneAbove = fibonacciLookup.get(i);
 
-        int distanceAbove = Integer.MAX_VALUE;
-        if (oneAbove <= MAX_VALUE) {
-            distanceAbove = oneAbove - n;
-        }
-
-        return Math.min(distanceAbove, n - oneBelow);
+        return Math.min(oneAbove - n, n - oneBelow);
     }
 
     private int getFibonacci(int n) {
