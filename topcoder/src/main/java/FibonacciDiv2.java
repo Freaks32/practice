@@ -14,6 +14,16 @@ public class FibonacciDiv2 {
     }
 
     public int find(int n) {
-        return 0;
+        int i = 1;
+        while (fibonacciLookup.get(i) < n) {
+            i++;
+            int fibonacciValue = fibonacciLookup.get(i - 2) + fibonacciLookup.get(i - 1);
+            fibonacciLookup.add(fibonacciValue);
+        }
+
+        int oneBelow = fibonacciLookup.get(i - 1);
+        int oneAbove = fibonacciLookup.get(i);
+
+        return Math.min(oneAbove - n, n - oneBelow);
     }
 }
