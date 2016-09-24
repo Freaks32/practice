@@ -6,6 +6,8 @@ import java.util.List;
  * https://community.topcoder.com/stat?c=problem_statement&pm=13159
  */
 public class FibonacciDiv2 {
+    private static int MAX_VALUE = 1000000;
+
     List<Integer> fibonacciLookup = new ArrayList<>();
 
     public FibonacciDiv2() {
@@ -24,6 +26,11 @@ public class FibonacciDiv2 {
         int oneBelow = fibonacciLookup.get(i - 1);
         int oneAbove = fibonacciLookup.get(i);
 
-        return Math.min(oneAbove - n, n - oneBelow);
+        int distanceAbove = Integer.MAX_VALUE;
+        if (oneAbove <= MAX_VALUE) {
+            distanceAbove = oneAbove - n;
+        }
+
+        return Math.min(distanceAbove, n - oneBelow);
     }
 }
