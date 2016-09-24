@@ -17,10 +17,8 @@ public class FibonacciDiv2 {
 
     public int find(int n) {
         int i = 1;
-        while (fibonacciLookup.get(i) < n) {
+        while (getFibonacci(i) < n) {
             i++;
-            int fibonacciValue = fibonacciLookup.get(i - 2) + fibonacciLookup.get(i - 1);
-            fibonacciLookup.add(fibonacciValue);
         }
 
         int oneBelow = fibonacciLookup.get(i - 1);
