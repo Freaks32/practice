@@ -11,7 +11,21 @@ public class ShorterSuperSum {
     private Map<Integer, Map<Integer, Integer>> valueLookup = new HashMap<>();
 
     public int calculate(int k, int n) {
-        return 0;
+        if (k <= 0) {
+            return n;
+        } else {
+            int value = lookup(k, n);
+            if (value != VALUE_NOT_IN_LOOKUP) {
+                return value;
+            }
+
+            int total = 0;
+            for (int i = 1; i <= n; i++) {
+                total += calculate(k - 1, i);
+            }
+            addToLookup(k, n, total);
+            return total;
+        }
     }
 
     private int lookup(int k, int n) {
