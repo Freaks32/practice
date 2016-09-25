@@ -23,7 +23,31 @@ public class UnsealTheSafe {
 
     public long countPasswords(int N) {
         initComboLookup(N);
-        return 0L;
+
+        long totalCombos = 0L;
+        for (int firstKey = 0; firstKey <= 9; firstKey++) {
+            totalCombos += countPasswordCombos(N - 1, firstKey);
+        }
+        return totalCombos;
+    }
+
+    private long countPasswordCombos(int N, int key) {
+        if (N == 0) {
+            return 1L;
+        } else {
+            long cachedCombos = getCachedCombos(N, key);
+            if (cachedCombos != NO_CACHED_VALUE) {
+                return cachedCombos;
+            }
+
+            long calculatedCombos = 0L;
+            int[] adjacentKeyList = getAdjacentKeys(key);
+            for (int nextKey : adjacentKeyList) {
+                calculatedCombos += countPasswordCombos(N - 1, nextKey);
+            }
+            setCachedCombos(N, key, calculatedCombos);
+            return calculatedCombos;
+        }
     }
 
     private void initComboLookup(int N) {
