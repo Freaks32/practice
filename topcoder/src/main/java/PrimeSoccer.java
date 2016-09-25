@@ -1,6 +1,4 @@
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * PrimeSoccer Problem from TopCoder
@@ -9,6 +7,12 @@ import java.util.Set;
 public class PrimeSoccer {
     // Only need Primes up to 18 as Soccer will only ever be 18 rounds w/ no more than 1 score each round
     private static Set<Integer> primeSet = new HashSet<>(Arrays.asList(2, 3, 5, 7, 9, 11, 13, 17));
+
+    // Safe to use double as Key here because this value is only
+    // calculated once and hence, will always be accurate
+    private Map<Double, Double[][]> probabilityLookup = new HashMap<>();
+
+    private static double PROBABILITY_MISSING = -1.0D;
 
     public double getProbability(int skillOfTeamA, int skillOfTeamB) {
         // Probabilities of each team scoring per round
@@ -36,5 +40,20 @@ public class PrimeSoccer {
             // Note: Performance can be improved via Dynamic Programming by caching this value
             return probNoScore + probScore;
         }
+    }
+
+    private double lookupProbability(int currentScore, double probability, int roundsLeft) {
+        if (!probabilityLookup.containsKey(probability)) {
+            Double[][] probabilityLookupTable = new Double[18][18];
+            probabilityLookup.put(probability, probabilityLookupTable);
+            for (int i = 0; i < 18; i++) {
+                for (int j = 0; j < 18; j++) {
+                    probabilityLookupTable[i][j] = PROBABILITY_MISSING;
+                }
+            }
+        }
+
+        Double[][] probabilityLookupTable = probabilityLookup.get(probability);
+        return probabilityLookupTable[currentScore][roundsLeft];
     }
 }
