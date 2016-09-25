@@ -4,17 +4,17 @@
  */
 public class UnsealTheSafe {
     // Lookup for all adjacent keys to specified key
-    private static Integer[][] adjacentKeyLookup = new Integer[][]{
-            new Integer[]{7},           // 0
-            new Integer[]{2, 4},        // 1
-            new Integer[]{1, 3, 5},     // 2
-            new Integer[]{2, 6},        // 3
-            new Integer[]{1, 5, 7},     // 4
-            new Integer[]{2, 4, 6, 8},  // 5
-            new Integer[]{3, 5, 9},     // 6
-            new Integer[]{0, 4, 8},     // 7
-            new Integer[]{5, 7, 9},     // 8
-            new Integer[]{6, 8}         // 9
+    private static int[][] adjacentKeyLookup = new int[][]{
+            new int[]{7},           // 0
+            new int[]{2, 4},        // 1
+            new int[]{1, 3, 5},     // 2
+            new int[]{2, 6},        // 3
+            new int[]{1, 5, 7},     // 4
+            new int[]{2, 4, 6, 8},  // 5
+            new int[]{3, 5, 9},     // 6
+            new int[]{0, 4, 8},     // 7
+            new int[]{5, 7, 9},     // 8
+            new int[]{6, 8}         // 9
     };
 
     private static long NO_CACHED_VALUE = -1L;
