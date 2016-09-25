@@ -6,7 +6,7 @@ import java.util.*;
  */
 public class PrimeSoccer {
     // Only need Primes up to 18 as Soccer will only ever be 18 rounds w/ no more than 1 score each round
-    private static Set<Integer> primeSet = new HashSet<>(Arrays.asList(2, 3, 5, 7, 9, 11, 13, 17));
+    private static Set<Integer> primeSet = new HashSet<>(Arrays.asList(2, 3, 5, 7, 11, 13, 17));
 
     // Safe to use double as Key here because this value is only
     // calculated once and hence, will always be accurate
