@@ -25,6 +25,11 @@ public class PrimeSoccer {
     }
 
     private double getProbabilityRounds(int currentScore, double probability, int roundsLeft) {
-        return 0D;
+        if (roundsLeft == 0) {
+            // Was final score prime or not?
+            return primeSet.contains(currentScore) ? 1D : 0D;
+        } else {
+            return 0D;
+        }
     }
 }
