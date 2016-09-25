@@ -29,7 +29,12 @@ public class PrimeSoccer {
             // Was final score prime or not?
             return primeSet.contains(currentScore) ? 1D : 0D;
         } else {
-            return 0D;
+            double probNoScore = (1 - probability) * getProbabilityRounds(currentScore, probability, roundsLeft - 1);
+            double probScore = probability * getProbabilityRounds(currentScore + 1, probability, roundsLeft - 1);
+
+            // Options are mutually exclusive, we can add the probabilities
+            // Note: Performance can be improved via Dynamic Programming by caching this value
+            return probNoScore + probScore
         }
     }
 }
