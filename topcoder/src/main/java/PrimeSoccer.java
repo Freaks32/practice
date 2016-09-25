@@ -34,7 +34,7 @@ public class PrimeSoccer {
 
             // Options are mutually exclusive, we can add the probabilities
             // Note: Performance can be improved via Dynamic Programming by caching this value
-            return probNoScore + probScore
+            return probNoScore + probScore;
         }
     }
 }
