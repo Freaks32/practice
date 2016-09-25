@@ -5,7 +5,7 @@ import org.junit.Test;
  * Test for PrimeSoccer Problem from TopCoder
  */
 public class PrimeSoccerTest {
-    private static double MAX_ERROR 1e-9;
+    private static double MAX_ERROR = 1e-9;
 
     PrimeSoccer primeSoccer = new PrimeSoccer();
 
