@@ -44,16 +44,33 @@ public class PrimeSoccer {
 
     private double lookupProbability(int currentScore, double probability, int roundsLeft) {
         if (!probabilityLookup.containsKey(probability)) {
-            Double[][] probabilityLookupTable = new Double[18][18];
+            Double[][] probabilityLookupTable = buildProbabilityLookupTable();
             probabilityLookup.put(probability, probabilityLookupTable);
-            for (int i = 0; i < 18; i++) {
-                for (int j = 0; j < 18; j++) {
-                    probabilityLookupTable[i][j] = PROBABILITY_MISSING;
-                }
-            }
         }
 
         Double[][] probabilityLookupTable = probabilityLookup.get(probability);
-        return probabilityLookupTable[currentScore][roundsLeft];
+        return probabilityLookupTable[currentScore][roundsLeft - 1];
+    }
+
+    private void setProbability(int currentScore, double probability, int roundsLeft, double calculatedProbability) {
+        if (!probabilityLookup.containsKey(probability)) {
+            Double[][] probabilityLookupTable = buildProbabilityLookupTable();
+            probabilityLookup.put(probability, probabilityLookupTable);
+        }
+
+        Double[][] probabilityLookupTable = probabilityLookup.get(probability);
+        probabilityLookupTable[currentScore][roundsLeft - 1] = calculatedProbability;
+    }
+
+    private Double[][] buildProbabilityLookupTable() {
+        // Score Range: 0-18 = 19
+        // Round Range: 1-18 = 18 (No caching for 0 rounds left)
+        Double[][] probabilityLookupTable = new Double[19][18];
+        for (int i = 0; i < 19; i++) {
+            for (int j = 0; j < 18; j++) {
+                probabilityLookupTable[i][j] = PROBABILITY_MISSING;
+            }
+        }
+        return probabilityLookupTable;
     }
 }
