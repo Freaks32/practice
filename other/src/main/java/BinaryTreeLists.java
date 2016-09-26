@@ -8,7 +8,24 @@ import java.util.*;
  * Assumption: Values in the BST will be distinct
  */
 public class BinaryTreeLists<T extends Comparable> {
+    Map<T, BST.Node<T>> nodeLookup = new HashMap<>();
+
+    private BinaryTreeLists(BST<T> tree) {
+        Iterator<BST.Node<T>> treeIterator = tree.inOrderIterator();
+
+        while (treeIterator.hasNext()) {
+            BST.Node<T> node = treeIterator.next();
+            nodeLookup.put(node.value, node);
+        }
+    }
+
     public static <T extends Comparable> List<T[]> getPossibleLists(BST<T> bst) {
+        if (bst != null) {
+            BinaryTreeLists binaryTreeLists = new BinaryTreeLists(bst);
+            Set<T> optionsSet = new HashSet<T>();
+            optionsSet.add(bst.root.value);
+            return binaryTreeLists.getPossibleListsInner(optionsSet, new Stack<T>());
+        }
         return null;
     }
 
