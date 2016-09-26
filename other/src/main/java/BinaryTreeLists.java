@@ -30,7 +30,39 @@ public class BinaryTreeLists<T extends Comparable> {
     }
 
     private List<List<T>> getPossibleListsInner(Set<T> optionsList, Stack<T> currentList, List<List<T>> currentLists) {
-        return null;
+        if (optionsList.isEmpty()) {
+            currentLists.add(new ArrayList<>(currentList));
+        } else {
+            Set<T> optionsListCopy = new HashSet<>(optionsList);
+            for (T option : optionsListCopy) {
+                optionsList.remove(option);
+                currentList.add(option);
+
+                BST.Node<T> node = getNode(option);
+                BST.Node<T> leftChild = node.getLeftChild();
+                if (leftChild != null) {
+                    optionsList.add(leftChild.getValue());
+                }
+                BST.Node<T> rightChild = node.getRightChild();
+                if (rightChild != null) {
+                    optionsList.add(rightChild.getValue());
+                }
+                // Mutates state of currentLists, no need for assignment
+                getPossibleListsInner(optionsList, currentList, currentLists);
+
+                if (leftChild != null) {
+                    optionsList.remove(leftChild.value);
+                }
+                if (rightChild != null) {
+                    optionsList.remove(rightChild.value);
+                }
+
+                currentList.remove(option);
+                optionsList.add(option);
+            }
+        }
+        return currentLists;
+    }
 
     private BST.Node<T> getNode(T value) {
         return nodeLookup.get(value);
