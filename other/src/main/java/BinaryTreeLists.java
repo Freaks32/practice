@@ -1,9 +1,11 @@
-import java.util.List;
+import java.util.*;
 
 /**
  * BinaryTreeLists
  * <p>
  * Given a Binary Search Tree, find all possible lists which could have been used to construct it.
+ * <p>
+ * Assumption: Values in the BST will be distinct
  */
 public class BinaryTreeLists {
     public <T extends Comparable> List<T[]> getPossibleLists(BST<T> tree) {
