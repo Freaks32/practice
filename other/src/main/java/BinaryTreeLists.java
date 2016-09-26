@@ -31,6 +31,9 @@ public class BinaryTreeLists<T extends Comparable> {
 
     protected List<T[]> getPossibleListsInner(Set<T> optionsList, Stack<T> currentList) {
         return null;
+
+    private BST.Node<T> getNode(T value) {
+        return nodeLookup.get(value);
     }
 }
 
