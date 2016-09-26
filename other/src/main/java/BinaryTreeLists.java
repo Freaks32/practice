@@ -22,6 +22,35 @@ class BST<T extends Comparable> {
         }
     }
 
+    public Iterator<Node<T>> inOrderIterator() {
+        return new InOrderIterator(this);
+    }
+
+    private class InOrderIterator implements Iterator<Node<T>> {
+        Node<T> nextNode;
+
+        public InOrderIterator(BST<T> tree) {
+            nextNode = tree.root;
+            if (nextNode != null) {
+                nextNode = nextNode.first();
+            }
+        }
+
+        @Override
+        public boolean hasNext() {
+            return nextNode != null;
+        }
+
+        @Override
+        public Node<T> next() {
+            Node<T> returnNode = nextNode;
+            if (returnNode != null) {
+                nextNode = returnNode.successor();
+            }
+            return returnNode;
+        }
+    }
+
     static class Node<T extends Comparable> {
         T value;
         Node<T> parent;
