@@ -7,8 +7,12 @@ import java.util.*;
  * <p>
  * Assumption: Values in the BST will be distinct
  */
-public class BinaryTreeLists {
-    public <T extends Comparable> List<T[]> getPossibleLists(BST<T> tree) {
+public class BinaryTreeLists<T extends Comparable> {
+    public static <T extends Comparable> List<T[]> getPossibleLists(BST<T> bst) {
+        return null;
+    }
+
+    protected List<T[]> getPossibleListsInner(Set<T> optionsList, Stack<T> currentList) {
         return null;
     }
 }
