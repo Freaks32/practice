@@ -19,17 +19,17 @@ public class BinaryTreeLists<T extends Comparable> {
         }
     }
 
-    public static <T extends Comparable> List<T[]> getPossibleLists(BST<T> bst) {
+    public static <T extends Comparable> List<List<T>> getPossibleLists(BST<T> bst) {
         if (bst != null) {
-            BinaryTreeLists binaryTreeLists = new BinaryTreeLists(bst);
+            BinaryTreeLists<T> binaryTreeLists = new BinaryTreeLists<>(bst);
             Set<T> optionsSet = new HashSet<T>();
             optionsSet.add(bst.root.value);
-            return binaryTreeLists.getPossibleListsInner(optionsSet, new Stack<T>());
+            return binaryTreeLists.getPossibleListsInner(optionsSet, new Stack<T>(), new ArrayList<>());
         }
         return null;
     }
 
-    protected List<T[]> getPossibleListsInner(Set<T> optionsList, Stack<T> currentList) {
+    private List<List<T>> getPossibleListsInner(Set<T> optionsList, Stack<T> currentList, List<List<T>> currentLists) {
         return null;
 
     private BST.Node<T> getNode(T value) {
