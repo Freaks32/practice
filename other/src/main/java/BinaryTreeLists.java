@@ -6,7 +6,7 @@ import java.util.List;
  * Given a Binary Search Tree, find all possible lists which could have been used to construct it.
  */
 public class BinaryTreeLists {
-    public <T> List<T[]> getPossibleLists(Node<T> tree) {
+    public <T extends Comparable> List<T[]> getPossibleLists(BST<T> tree) {
         return null;
     }
 }
