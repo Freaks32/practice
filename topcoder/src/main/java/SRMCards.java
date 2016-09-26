@@ -13,7 +13,35 @@ public class SRMCards {
         for (int card : cards) {
             cardsInPlay.add(card);
         }
-        return 0;
+
+        int roundNumber = 0;
+        while (!cardsInPlay.isEmpty()) {
+            int bestCard = -1;
+            int minCardsRemoved = Integer.MAX_VALUE;
+
+            for (Integer card : cardsInPlay) {
+                int cardsRemoved = 1;
+                if (cardInPlay(card - 1)) {
+                    cardsRemoved++;
+                }
+                if (cardInPlay(card + 1)) {
+                    cardsRemoved++;
+                }
+
+                if (cardsRemoved < minCardsRemoved) {
+                    bestCard = card;
+                    minCardsRemoved = cardsRemoved;
+                }
+            }
+
+            removeCard(bestCard);
+            removeCard(bestCard - 1);
+            removeCard(bestCard + 1);
+
+            roundNumber++;
+        }
+
+        return roundNumber;
     }
 
     private boolean cardInPlay(int card) {
