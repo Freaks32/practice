@@ -24,15 +24,21 @@ class BST<T extends Comparable> {
 
     static class Node<T extends Comparable> {
         T value;
+        Node<T> parent;
         Node<T> left;
         Node<T> right;
 
         public Node(T value) {
-            this(value, null, null);
+            this(value, null, null, null);
         }
 
-        public Node(T value, Node<T> left, Node<T> right) {
+        public Node(T value, Node<T> parent) {
+            this(value, parent, null, null);
+        }
+
+        public Node(T value, Node<T> parent, Node<T> left, Node<T> right) {
             this.value = value;
+            this.parent = parent;
             this.left = left;
             this.right = right;
         }
@@ -42,15 +48,42 @@ class BST<T extends Comparable> {
                 if (left != null) {
                     left.add(value);
                 } else {
-                    left = new Node<>(value);
+                    left = new Node<>(value, this);
                 }
             } else {
                 if (right != null) {
                     right.add(value);
                 } else {
-                    right = new Node<>(value);
+                    right = new Node<>(value, this);
                 }
             }
+        }
+
+        public Node<T> first() {
+            if (left != null) {
+                return left.first();
+            } else {
+                return this;
+            }
+        }
+
+        public Node<T> successor() {
+            if (right != null) {
+                return right.first();
+            } else {
+                return successorParent();
+            }
+        }
+
+        private Node<T> successorParent() {
+            if (parent != null) {
+                if (parent.getRightChild() != this) {
+                    return parent;
+                } else {
+                    return parent.successorParent();
+                }
+            }
+            return null;
         }
 
         public T getValue() {
