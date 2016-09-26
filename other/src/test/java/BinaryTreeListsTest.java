@@ -8,6 +8,6 @@ public class BinaryTreeListsTest {
 
     @Test
     public void getPossibleLists() throws Exception {
-
+        binaryTreeLists.getPossibleLists(null);
     }
 }

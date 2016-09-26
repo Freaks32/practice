@@ -22,7 +22,7 @@ class BST<T extends Comparable> {
         }
     }
 
-    class Node<T extends Comparable> {
+    static class Node<T extends Comparable> {
         T value;
         Node<T> left;
         Node<T> right;
