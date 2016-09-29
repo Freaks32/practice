@@ -29,10 +29,16 @@ public class IsBinarySearchTree {
     public boolean checkBST(Node root) {
         return false;
     }
+}
 
-    private static class Node {
-        int data;
-        Node left;
-        Node right;
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int data, Node left, Node right) {
+        this.data = data;
+        this.left = left;
+        this.right = right;
     }
 }
