@@ -27,7 +27,28 @@
  */
 public class IsBinarySearchTree {
     public boolean checkBST(Node root) {
-        return false;
+        if (root == null) {
+            return false;
+        }
+        return checkBSTInternal(root, null, null);
+    }
+
+    private boolean checkBSTInternal(Node root, Integer leftBound, Integer rightBound) {
+        if (root == null) {
+            return true;
+        }
+
+        if (leftBound != null && root.data <= leftBound) {
+            return false;
+        }
+        if (rightBound != null && root.data >= rightBound) {
+            return false;
+        }
+        if (!checkBSTInternal(root.left, leftBound, root.data) ||
+                !checkBSTInternal(root.right, root.data, rightBound)) {
+            return false;
+        }
+        return true;
     }
 }
 
