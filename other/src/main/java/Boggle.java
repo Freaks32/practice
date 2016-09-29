@@ -7,7 +7,7 @@ public class Boggle {
         return 0;
     }
 
-    private String[] wordsPresent(String[] words) {
+    public String[] wordsPresent(String[] words) {
         return 0;
     }
 
@@ -15,7 +15,7 @@ public class Boggle {
         return false;
     }
 
-    private int wordPresent(String word) {
+    public boolean wordPresent(String word) {
         return false;
     }
 }
