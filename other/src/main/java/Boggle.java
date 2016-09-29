@@ -1,11 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Given a board of letters and a word (or list of words)
  * determine which of the words are present in the board
  */
-public class Boggle {
+public class Boggle<T> {
+    // Refer to starting positions in Boggle Board given a value
+    private Map<T, List<BoggleNode<T>>> boggleBoardLookup;
+
     public Boggle(char[][] gameBoard) {
         // Filter out bad input
         {
@@ -35,11 +39,12 @@ public class Boggle {
             }
         }
 
-        // Do second pass to connect neighboring nodes & add to Map
+        // Do second pass to connect neighboring nodes & add to lookup
         for (int x = 0; x < nodeBoard.size(); x++) {
             for (int y = 0; y < nodeBoard.get(x).size(); y++) {
-                nodeBoard.get(x).get(y).setNeighbors(getNeighbors(nodeBoard, x, y));
-
+                BoggleNode<Character> node = nodeBoard.get(x).get(y);
+                node.setNeighbors(getNeighbors(nodeBoard, x, y));
+                addToBoardLookup(node);
             }
         }
     }
@@ -58,6 +63,15 @@ public class Boggle {
 
     public boolean wordPresent(String word) {
         return false;
+    }
+
+    private <T> void addToBoardLookup(BoggleNode<T> node) {
+        if (!boggleBoardLookup.containsKey(node.getValue())) {
+            List<BoggleNode<T>> nodeList = new ArrayList<>();
+            boggleBoardLookup.put(node.getValue(), nodeList);
+        }
+        List<BoggleNode<T>> nodeList = boggleBoardLookup.get(node.getValue());
+        nodeList.add(node);
     }
 
     private <T> List<BoggleNode<T>> getNeighbors(BoggleNode<T>[][] gameBoard, int x, int y) {
