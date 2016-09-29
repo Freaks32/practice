@@ -26,7 +26,7 @@ public class IsBinarySearchTreeTest {
         Node left = new Node(2, leftLeft, leftRight);
         Node right = new Node(7, rightLeft, null);
 
-        return new Node(3, left, right);
+        return new Node(5, left, right);
     }
 
     @Test
