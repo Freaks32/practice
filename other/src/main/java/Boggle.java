@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,9 +9,9 @@ import java.util.Map;
  */
 public class Boggle {
     // Refer to starting positions in Boggle Board given a value
-    private Map<Character, List<BoggleNode<Character>>> boggleBoardLookup;
+    private Map<Character, List<BoggleNode<Character>>> boggleBoardLookup = new HashMap<>();
 
-    public Boggle(Character[][] gameBoard) {
+    public Boggle(char[][] gameBoard) {
         // Filter out bad input
         {
             if (gameBoard == null || gameBoard.length < 1 || gameBoard[0].length < 1) {

@@ -1,6 +1,10 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Test the Boggle Problem (Find words in a given Boggle Board)
  */
@@ -16,8 +20,8 @@ public class BoggleTest {
     @Test
     public void wordsPresent() throws Exception {
         String[] inputWords = new String[]{"STAR", "TONE", "NOTE", "SAND"};
-        String[] expectedWords = new String[]{"NOTE", "SAND"};
-        Assert.assertArrayEquals(expectedWords, BOGGLE.wordsPresent(expectedWords));
+        List<String> expectedWords = new ArrayList<>(Arrays.asList("NOTE", "SAND"));
+        Assert.assertEquals(expectedWords, BOGGLE.wordsPresent(inputWords));
     }
 
     @Test
