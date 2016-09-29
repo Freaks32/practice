@@ -1,3 +1,5 @@
+import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 /**
@@ -34,12 +36,81 @@ import java.util.Scanner;
  * After each new integer is added to the list, print the list's updated median on a new line as a single double-precision number scaled to  decimal place (i.e.,  format).
  */
 public class RunningMedian {
+    PriorityQueue<Integer> lowList;
+    PriorityQueue<Integer> highList;
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+
+        RunningMedian runningMedian = new RunningMedian();
+
         int n = in.nextInt();
-        int a[] = new int[n];
         for (int a_i = 0; a_i < n; a_i++) {
-            a[a_i] = in.nextInt();
+            int value = in.nextInt();
+            runningMedian.add(value);
+            System.out.println(String.format("%.1f", runningMedian.runningMedian()));
+        }
+    }
+
+    public RunningMedian() {
+        lowList = new PriorityQueue<>(new MaxHeapComparator());
+        highList = new PriorityQueue<>();
+    }
+
+    public void add(int value) {
+        lowList.add(value);
+    }
+
+    public double runningMedian() {
+        // Equalize Lists
+        while (lowList.size() - highList.size() > 1) {
+            shiftLowToHigh();
+        }
+        while (highList.size() - lowList.size() > 1) {
+            shiftHighToLow();
+        }
+
+        // Shift values until all values in lowList <= all values in highList
+        if (highList.peek() != null && lowList.peek() != null) {
+            while (highList.peek() < lowList.peek()) {
+                flip();
+            }
+        }
+
+        if ((lowList.size() + highList.size()) % 2 == 0) {
+            // Even, Do Average
+            return (double) (lowList.peek() + highList.peek()) / 2.0D;
+        } else {
+            // Odd, Find the Median
+            if (lowList.size() > highList.size()) {
+                return (double) lowList.peek();
+            } else {
+                return (double) highList.peek();
+            }
+        }
+    }
+
+    private void shiftLowToHigh() {
+        highList.add(lowList.poll());
+    }
+
+    private void shiftHighToLow() {
+        lowList.add(highList.poll());
+    }
+
+    private void flip() {
+        Integer low = lowList.poll();
+        lowList.add(highList.poll());
+        highList.add(low);
+    }
+
+    /**
+     * Comparator necessary for MaxHeap PriorityQueue, assumes no null values
+     */
+    private static class MaxHeapComparator implements Comparator<Integer> {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o2 - o1;
         }
     }
 }
