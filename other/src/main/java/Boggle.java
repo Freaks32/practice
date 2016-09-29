@@ -49,16 +49,8 @@ public class Boggle<T> {
         }
     }
 
-    public static String[] wordsPresent(char[][] gameBoard, String[] words) {
-        return null;
-    }
-
     public String[] wordsPresent(String[] words) {
         return null;
-    }
-
-    public static boolean wordPresent(char[][] gameBoard, String word) {
-        return false;
     }
 
     public boolean wordPresent(String word) {
