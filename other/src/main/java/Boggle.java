@@ -6,11 +6,11 @@ import java.util.Map;
  * Given a board of letters and a word (or list of words)
  * determine which of the words are present in the board
  */
-public class Boggle<T> {
+public class Boggle {
     // Refer to starting positions in Boggle Board given a value
-    private Map<T, List<BoggleNode<T>>> boggleBoardLookup;
+    private Map<Character, List<BoggleNode<Character>>> boggleBoardLookup;
 
-    public Boggle(char[][] gameBoard) {
+    public Boggle(Character[][] gameBoard) {
         // Filter out bad input
         {
             if (gameBoard == null || gameBoard.length < 1 || gameBoard[0].length < 1) {
@@ -35,7 +35,7 @@ public class Boggle<T> {
         for (int x = 0; x < gameBoard.length; x++) {
             for (int y = 0; y < gameBoard[x].length; y++) {
                 // Initial neighbor capacity = 8 (Max # neighbors for any single node)
-                nodeBoard.get(x).add(new BoggleNode<>(gameBoard[x][y]));
+                nodeBoard.get(x).add(new BoggleNode<Character>(gameBoard[x][y]));
             }
         }
 
@@ -49,25 +49,64 @@ public class Boggle<T> {
         }
     }
 
-    public String[] wordsPresent(String[] words) {
-        return null;
+    public List<String> wordsPresent(String[] words) {
+        List<String> wordsPresent = new ArrayList<>();
+        for (String word : words) {
+            if (wordPresent(word)) {
+                wordsPresent.add(word);
+            }
+        }
+        return wordsPresent;
     }
 
     public boolean wordPresent(String word) {
+        if (word == null) {
+            return false;
+        } else if (word.length() < 1) {
+            return true;
+        }
+
+        List<BoggleNode<Character>> startingNodes = lookupBoggleNodes(word.charAt(0));
+        for (BoggleNode<Character> startingNode : startingNodes) {
+            if (wordPresent(startingNode, word, 1)) {
+                return true;
+            }
+        }
         return false;
     }
 
-    private <T> void addToBoardLookup(BoggleNode<T> node) {
-        if (!boggleBoardLookup.containsKey(node.getValue())) {
-            List<BoggleNode<T>> nodeList = new ArrayList<>();
-            boggleBoardLookup.put(node.getValue(), nodeList);
+    private boolean wordPresent(BoggleNode<Character> node, String word, int wordIndex) {
+        if (wordIndex >= word.length()) {
+            return true;
+        } else {
+            for (BoggleNode<Character> nextNode : node.getNeighbors()) {
+                if (nextNode.getValue() == word.charAt(wordIndex)) {
+                    if (wordPresent(nextNode, word, wordIndex + 1)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
-        List<BoggleNode<T>> nodeList = boggleBoardLookup.get(node.getValue());
+    }
+
+    private List<BoggleNode<Character>> lookupBoggleNodes(Character value) {
+        if (value == null || !boggleBoardLookup.containsKey(value)) {
+            return null;
+        }
+        return boggleBoardLookup.get(value);
+    }
+
+    private void addToBoardLookup(BoggleNode<Character> node) {
+        if (!boggleBoardLookup.containsKey(node.getValue())) {
+            boggleBoardLookup.put(node.getValue(), new ArrayList<>());
+        }
+        List<BoggleNode<Character>> nodeList = boggleBoardLookup.get(node.getValue());
         nodeList.add(node);
     }
 
-    private <T> List<BoggleNode<T>> getNeighbors(BoggleNode<T>[][] gameBoard, int x, int y) {
-        List<BoggleNode<T>> neighbors = new ArrayList<>(8);
+    private List<BoggleNode<Character>> getNeighbors(List<List<BoggleNode<Character>>> gameBoard, int x, int y) {
+        List<BoggleNode<Character>> neighbors = new ArrayList<>(8);
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 // Ignore Self
@@ -80,12 +119,12 @@ public class Boggle<T> {
                 int targetY = y + j;
 
                 // Bounds Checking
-                if (targetX < 0 || targetX >= gameBoard.length ||
-                        targetY < 0 || targetY >= gameBoard[targetX].length) {
+                if (targetX < 0 || targetX >= gameBoard.size() ||
+                        targetY < 0 || targetY >= gameBoard.get(targetX).size()) {
                     continue;
                 }
 
-                neighbors.add(gameBoard[targetX][targetY]);
+                neighbors.add(gameBoard.get(targetX).get(targetY));
             }
         }
         return neighbors;
@@ -96,11 +135,11 @@ public class Boggle<T> {
 
         List<BoggleNode<T>> neighbors;
 
-        public GraphNode(T value) {
+        public BoggleNode(T value) {
             this.value = value;
         }
 
-        public GraphNode(T value, int neighborInitialCapacity) {
+        public BoggleNode(T value, int neighborInitialCapacity) {
             this(value);
             this.neighbors = new ArrayList<>(neighborInitialCapacity);
         }
