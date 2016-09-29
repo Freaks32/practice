@@ -3,11 +3,11 @@
  * determine which of the words are present in the board
  */
 public class Boggle {
-    public static int wordsPresent(char[][] gameBoard, String[] words) {
+    public static String[] wordsPresent(char[][] gameBoard, String[] words) {
         return 0;
     }
 
-    private int wordsPresent(String[] words) {
+    private String[] wordsPresent(String[] words) {
         return 0;
     }
 
