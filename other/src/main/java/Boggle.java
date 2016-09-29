@@ -22,6 +22,31 @@ public class Boggle {
         return false;
     }
 
+    private <T> List<BoggleNode<T>> getNeighbors(BoggleNode<T>[][] gameBoard, int x, int y) {
+        List<BoggleNode<T>> neighbors = new ArrayList<>(8);
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                // Ignore Self
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+
+                // Calculate Target Coordinates
+                int targetX = x + i;
+                int targetY = y + j;
+
+                // Bounds Checking
+                if (targetX < 0 || targetX >= gameBoard.length ||
+                        targetY < 0 || targetY >= gameBoard[targetX].length) {
+                    continue;
+                }
+
+                neighbors.add(gameBoard[targetX][targetY]);
+            }
+        }
+        return neighbors;
+    }
+
     private static class BoggleNode<T> {
         T value;
 
