@@ -7,11 +7,11 @@ import java.util.List;
  */
 public class Boggle {
     public static String[] wordsPresent(char[][] gameBoard, String[] words) {
-        return 0;
+        return null;
     }
 
     public String[] wordsPresent(String[] words) {
-        return 0;
+        return null;
     }
 
     public static boolean wordPresent(char[][] gameBoard, String word) {
