@@ -6,6 +6,44 @@ import java.util.List;
  * determine which of the words are present in the board
  */
 public class Boggle {
+    public Boggle(char[][] gameBoard) {
+        // Filter out bad input
+        {
+            if (gameBoard == null || gameBoard.length < 1 || gameBoard[0].length < 1) {
+                throw new IllegalArgumentException("Invalid Game Board Encountered");
+            }
+            int expectedLength = gameBoard[0].length;
+            for (int i = 1; i < gameBoard.length; i++) {
+                if (expectedLength != gameBoard[i].length) {
+                    throw new IllegalArgumentException("Game Board is not Square!");
+                }
+            }
+        }
+
+        // Assume that the Boggle board will be used in multiple instances
+        // Pay the upfront cost of pre-processing the board for lookup speed
+
+        List<List<BoggleNode<Character>>> nodeBoard = new ArrayList<>(gameBoard.length);
+        for (int i = 0; i < gameBoard.length; i++) {
+            nodeBoard.add(new ArrayList<>(gameBoard[i].length));
+        }
+        // Do initial pass to initialize all Nodes
+        for (int x = 0; x < gameBoard.length; x++) {
+            for (int y = 0; y < gameBoard[x].length; y++) {
+                // Initial neighbor capacity = 8 (Max # neighbors for any single node)
+                nodeBoard.get(x).add(new BoggleNode<>(gameBoard[x][y]));
+            }
+        }
+
+        // Do second pass to connect neighboring nodes & add to Map
+        for (int x = 0; x < nodeBoard.size(); x++) {
+            for (int y = 0; y < nodeBoard.get(x).size(); y++) {
+                nodeBoard.get(x).get(y).setNeighbors(getNeighbors(nodeBoard, x, y));
+
+            }
+        }
+    }
+
     public static String[] wordsPresent(char[][] gameBoard, String[] words) {
         return null;
     }
