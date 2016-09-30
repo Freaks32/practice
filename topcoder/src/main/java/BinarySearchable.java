@@ -29,7 +29,26 @@ public class BinarySearchable {
     }
 
     private int howMany() {
-        return 0;
+        int numBinarySearchable = 0;
+
+        for (int index = 0; index < sequence.length; index++) {
+            int currentValue = sequence[index];
+            highQueue.remove(currentValue);
+
+            if (isBinarySearchable(currentValue)) {
+                numBinarySearchable++;
+            }
+
+            lowQueue.add(currentValue);
+        }
+
+        return numBinarySearchable;
+    }
+
+    private boolean isBinarySearchable(int currentValue) {
+        boolean lowRequirementMet = lowQueue.size() < 1 || currentValue > lowQueue.peek();
+        boolean highRequirementMet = highQueue.size() < 1 || currentValue < highQueue.peek();
+        return lowRequirementMet && highRequirementMet;
     }
 
     /**
