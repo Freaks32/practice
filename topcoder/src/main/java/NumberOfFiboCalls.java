@@ -27,4 +27,16 @@ public class NumberOfFiboCalls {
     private void setNumberOfCalls(int n, Integer[] numCalls) {
         callLookup.put(n, numCalls);
     }
+
+    private Integer[] addArrays(Integer[] a, Integer[] b) {
+        if (a.length != b.length) {
+            throw new IllegalArgumentException("Arrays are not same length");
+        }
+
+        Integer[] sum = new Integer[a.length];
+        for (int i = 0; i < a.length; i++) {
+            sum[i] = a[i] + b[i];
+        }
+        return sum;
+    }
 }
