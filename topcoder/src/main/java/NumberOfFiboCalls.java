@@ -8,6 +8,11 @@ import java.util.Map;
 public class NumberOfFiboCalls {
     Map<Integer, Integer[]> callLookup = new HashMap<>();
 
+    public NumberOfFiboCalls() {
+        callLookup.put(0, new Integer[]{1, 0});
+        callLookup.put(1, new Integer[]{0, 1});
+    }
+
     public int[] fiboCallsMade(int n) {
         return null;
     }
