@@ -6,10 +6,16 @@ import java.util.PriorityQueue;
  * https://community.topcoder.com/stat?c=problem_statement&pm=5869
  */
 public class BinarySearchable {
+    private final int[] sequence;
     private final PriorityQueue<Integer> lowQueue;
     private final PriorityQueue<Integer> highQueue;
 
     private BinarySearchable(int[] sequence) {
+        if (sequence.length < 1) {
+            throw new IllegalArgumentException("Array is empty!");
+        }
+
+        this.sequence = sequence;
         lowQueue = new PriorityQueue<>(10, new MaxHeap());
         highQueue = new PriorityQueue<>(10);
 
@@ -35,5 +41,4 @@ public class BinarySearchable {
             return o2 - o1;
         }
     }
-
 }
