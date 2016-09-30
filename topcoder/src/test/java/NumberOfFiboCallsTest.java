@@ -9,9 +9,9 @@ public class NumberOfFiboCallsTest {
 
     @Test
     public void fiboCallsMade() throws Exception {
-        Assert.assertEquals(new int[]{1, 0}, numberOfFiboCalls.fiboCallsMade(0));
-        Assert.assertEquals(new int[]{1, 2}, numberOfFiboCalls.fiboCallsMade(3));
-        Assert.assertEquals(new int[]{5, 8}, numberOfFiboCalls.fiboCallsMade(6));
-        Assert.assertEquals(new int[]{10946, 17711}, numberOfFiboCalls.fiboCallsMade(22));
+        Assert.assertArrayEquals(new int[]{1, 0}, numberOfFiboCalls.fiboCallsMade(0));
+        Assert.assertArrayEquals(new int[]{1, 2}, numberOfFiboCalls.fiboCallsMade(3));
+        Assert.assertArrayEquals(new int[]{5, 8}, numberOfFiboCalls.fiboCallsMade(6));
+        Assert.assertArrayEquals(new int[]{10946, 17711}, numberOfFiboCalls.fiboCallsMade(22));
     }
 }
