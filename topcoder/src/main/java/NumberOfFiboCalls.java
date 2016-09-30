@@ -14,7 +14,21 @@ public class NumberOfFiboCalls {
     }
 
     public int[] fiboCallsMade(int n) {
-        return null;
+        Integer[] callsMade = fiboCallsMadeInternal(n);
+        return new int[]{callsMade[0], callsMade[1]};
+    }
+
+    private Integer[] fiboCallsMadeInternal(int n) {
+        Integer[] numCalls = getNumberOfCalls(n);
+        if (numCalls != null) {
+            return numCalls;
+        } else {
+            Integer[] sumCalls = addArrays(
+                    fiboCallsMadeInternal(n - 2),
+                    fiboCallsMadeInternal(n - 1));
+            setNumberOfCalls(n, sumCalls);
+            return sumCalls;
+        }
     }
 
     private Integer[] getNumberOfCalls(int n) {
