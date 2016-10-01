@@ -11,6 +11,6 @@ public class EmoticonsDiv2Test {
         Assert.assertEquals(5, EmoticonsDiv2.printSmiles(6));
         Assert.assertEquals(11, EmoticonsDiv2.printSmiles(11));
         Assert.assertEquals(8, EmoticonsDiv2.printSmiles(16));
-        Assert.assertEquals(1000, EmoticonsDiv2.printSmiles(1000));
+        Assert.assertEquals(21, EmoticonsDiv2.printSmiles(1000));
     }
 }
