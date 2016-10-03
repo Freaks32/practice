@@ -10,4 +10,8 @@ public class VariableBaseMultiplication {
 
         return Long.toString(aBase10 * bBase10, base);
     }
+
+    public static String manualMultiply(String a, String b, int base) {
+        return null;
+    }
 }

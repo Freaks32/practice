@@ -11,4 +11,11 @@ public class VariableBaseMultiplicationTest {
         Assert.assertEquals("11010111101", VariableBaseMultiplication.multiply("1000101", "11001", 2));
         Assert.assertEquals("23d1c3f72fd06", VariableBaseMultiplication.multiply("1fd8e82d", "11fede", 16));
     }
+
+    @Test
+    public void manualMultiply() throws Exception {
+        Assert.assertEquals("122010", VariableBaseMultiplication.manualMultiply("2110", "21", 3));
+        Assert.assertEquals("11010111101", VariableBaseMultiplication.manualMultiply("1000101", "11001", 2));
+        Assert.assertEquals("23d1c3f72fd06", VariableBaseMultiplication.manualMultiply("1fd8e82d", "11fede", 16));
+    }
 }
