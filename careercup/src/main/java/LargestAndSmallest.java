@@ -9,10 +9,41 @@
  */
 public class LargestAndSmallest {
     public static int smallest(int[] array) {
-        return 0;
+        if (array == null || array.length < 1) {
+            throw new IllegalArgumentException("Array is invalid");
+        }
+        int left = array[0];
+        int right = array[array.length - 1];
+        return Math.min(left, right);
     }
 
     public static int largest(int[] array) {
-        return 0;
+        if (array == null || array.length < 1) {
+            throw new IllegalArgumentException("Array is invalid");
+        }
+        if (array.length < 3) {
+            return Math.max(array[0], array[array.length - 1]);
+        } else {
+            // Do binary search on array for max
+            int leftBound = 0;
+            int rightBound = array.length;
+            int targetIndex = (rightBound + leftBound) / 2;
+
+            while (array[targetIndex] < array[targetIndex - 1] ||
+                    array[targetIndex] < array[targetIndex + 1]) {
+                // Find which direction to proceed
+                if (array[targetIndex] < array[targetIndex - 1]) {
+                    // Decreasing sequence, max is left
+                    rightBound = targetIndex;
+                } else {
+                    // Increasing sequence, max is right
+                    leftBound = targetIndex;
+                }
+
+                targetIndex = (rightBound + leftBound) / 2;
+            }
+
+            return array[targetIndex];
+        }
     }
 }
