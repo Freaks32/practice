@@ -9,7 +9,10 @@ import java.util.PriorityQueue;
  */
 public class MinimumOfSubarrays {
     /**
-     * Provides an n^2 solution (due to O(n) runtime of PriorityQueue.remove())
+     * Provides an O(n*k) solution where N = size of input, and K = k
+     * <p>
+     * This is due to the O(k) time to perform PriorityQueue.remove()
+     * which happens once per iteration of finding the minimum of a subarray (N)
      */
     public static Integer[] minimumOfSubarrays(Integer[] input, int k) {
         if (input == null || input.length < k) {
