@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * https://careercup.com/question?id=6002346992599040
@@ -22,7 +25,59 @@ import java.util.List;
 public class Ranges {
     public static List<ImmutableRange> getRanges
             (List<ImmutableRange> shards, List<ImmutableRange> keys) {
-        return null;
+        List<ImmutableRange> ranges = new ArrayList<>();
+
+        PriorityQueue<ImmutableRange> shardList =
+                new PriorityQueue<>(10, new RangeComparator());
+        PriorityQueue<ImmutableRange> keyList =
+                new PriorityQueue<>(10, new RangeComparator());
+        for (ImmutableRange range : shards) {
+            shardList.add(range);
+        }
+        for (ImmutableRange range : keys) {
+            keyList.add(range);
+        }
+
+        ImmutableRange shard = shardList.poll();
+        ImmutableRange key = keyList.poll();
+        while (shard != null) {
+            // Throw out keys before current shard
+            while (key.getRightBound() < shard.getLeftBound()) {
+                key = keyList.poll();
+            }
+
+            // If key overlaps this shard, we should output a range
+            if (key.getLeftBound() < shard.getRightBound()) {
+                // Calculate current range start and find end
+                long leftBound = Math.max(key.getLeftBound(), shard.getLeftBound());
+                long rightBound = Math.min(key.getRightBound(), shard.getRightBound());
+
+                while (key != null && key.getLeftBound() < shard.getRightBound()) {
+                    rightBound = Math.min(shard.getRightBound(),
+                            Math.max(rightBound, key.getRightBound()));
+                    key = keyList.poll();
+                }
+
+                ranges.add(new ImmutableRange(leftBound, rightBound));
+            }
+
+            shard = shardList.poll();
+        }
+
+        return ranges;
+    }
+
+    private static class RangeComparator implements Comparator<ImmutableRange> {
+        @Override
+        public int compare(ImmutableRange o1, ImmutableRange o2) {
+            if (o1.getLeftBound() < o2.getLeftBound()) {
+                return -1;
+            } else if (o1.getLeftBound() > o2.getLeftBound()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
     }
 }
 
