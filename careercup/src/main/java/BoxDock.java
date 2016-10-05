@@ -14,6 +14,7 @@ public class BoxDock {
     private static final int NO_BOX = -1;
 
     private int numMoves = 0;
+    private int currentIndex;
     private int[] docks;
     private int[] boxLookup;
 
@@ -25,6 +26,8 @@ public class BoxDock {
         for (int i = 0; i < docks.length; i++) {
             setBoxIndex(docks[i], i);
         }
+
+        this.currentIndex = this.docks.length - 1;
     }
 
     public static int sortBoxes(int[] docks) {
@@ -33,6 +36,20 @@ public class BoxDock {
 
     private int sortBoxes() {
         return 0;
+    }
+
+    private void swap(int index) {
+        if (currentIndex != index) {
+            int boxNum = docks[index];
+
+            docks[currentIndex] = boxNum;
+            docks[index] = NO_BOX;
+
+            setBoxIndex(boxNum, currentIndex);
+
+            currentIndex = index;
+            numMoves++;
+        }
     }
 
     private void setBoxIndex(int boxNum, int index) {
