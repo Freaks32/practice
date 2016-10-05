@@ -7,7 +7,7 @@ import org.junit.Test;
 public class BoxDockTest {
     @Test
     public void sortBoxes() throws Exception {
-        Assert.assertEquals(3, BoxDock.sortBoxes(new int[]{1, 4, 3, 2}));
-        Assert.assertEquals(6, BoxDock.sortBoxes(new int[]{4, 3, 2, 1}));
+        Assert.assertEquals(3, BoxDock.sortBoxes(new int[]{0, 3, 2, 1}));
+        Assert.assertEquals(6, BoxDock.sortBoxes(new int[]{3, 2, 1, 0}));
     }
 }

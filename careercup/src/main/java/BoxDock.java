@@ -23,7 +23,7 @@ public class BoxDock {
 
         this.boxLookup = new int[docks.length];
         for (int i = 0; i < docks.length; i++) {
-            boxLookup[docks[i] - 1] = i;
+            setBoxIndex(docks[i], i);
         }
     }
 
@@ -35,7 +35,11 @@ public class BoxDock {
         return 0;
     }
 
+    private void setBoxIndex(int boxNum, int index) {
+        boxLookup[boxNum] = index;
+    }
+
     private int getBoxIndex(int boxNum) {
-        return boxLookup[boxNum - 1];
+        return boxLookup[boxNum];
     }
 }
