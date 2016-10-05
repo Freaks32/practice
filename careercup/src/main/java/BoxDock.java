@@ -35,7 +35,15 @@ public class BoxDock {
     }
 
     private int sortBoxes() {
-        return 0;
+        for (int i = 0; i < docks.length - 1; i++) {
+            if (docks[i] != i) {
+                swap(i);
+            }
+            while (currentIndex != docks.length - 1) {
+                swap(getBoxIndex(currentIndex));
+            }
+        }
+        return numMoves;
     }
 
     private void swap(int index) {
