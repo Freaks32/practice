@@ -43,6 +43,23 @@
  */
 public class EquilibriumIndex {
     public static int equilibriumIndex(int[] array) {
-        return 0;
+        int index = 0;
+        int leftSum = 0;
+        int rightSum = 0;
+        for (int i = 1; i < array.length; i++) {
+            rightSum += array[i];
+        }
+
+        while (leftSum != rightSum && index < array.length) {
+            leftSum += array[index];
+            index++;
+            rightSum -= array[index];
+        }
+
+        if (leftSum == rightSum) {
+            return index;
+        } else {
+            return -1;
+        }
     }
 }
