@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,7 +13,22 @@ import java.util.Set;
  */
 public class PairsInRange {
     public static Set<Pair<Integer>> pairsInRange(int[] numbers, int low, int high) {
-        return null;
+        Set<Pair<Integer>> output = new HashSet<>();
+
+        // Sort to make Binary Searchable O(n*lg(n))
+        Arrays.sort(numbers);
+
+        // For each number, search for target values which sum to range
+        for (int number : numbers) {
+            int targetHigh = high - number;
+            int targetLow = low - number;
+
+            int indexLow = binarySearchGte(numbers, targetLow, 0, numbers.length);
+            for (int i = indexLow; i < numbers.length && numbers[i] <= targetHigh; i++) {
+                output.add(new Pair<>(number, numbers[i]));
+            }
+        }
+        return output;
     }
 
     /**
