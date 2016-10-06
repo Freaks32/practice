@@ -1,4 +1,5 @@
-import java.util.PriorityQueue;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Implementation for https://careercup.com/question?id=5689975619190784
@@ -9,35 +10,52 @@ import java.util.PriorityQueue;
  */
 public class MinimumOfSubarrays {
     /**
-     * Provides an O(n*k) solution where N = size of input, and K = k
+     * Provides an O(n) solution where N = size of input
      * <p>
-     * This is due to the O(k) time to perform PriorityQueue.remove()
-     * which happens once per iteration of finding the minimum of a subarray (N)
+     * Using a dequeue, we can keep track of the minimum element
+     * by using a sliding window where the minimum will always be tracked
+     * by the first position in the queue.
+     * <p>
+     * If a new minimum is encountered, we slide to the new minimum and
+     * hold on to it. If the queue ever exceeds k, we simply pop the first element
+     * <p>
+     * Problem with current state: No way to find current minimum after popping minimum
+     * when queue exceeds k. Not correct for all cases. :(
      */
     public static Integer[] minimumOfSubarrays(Integer[] input, int k) {
         if (input == null || input.length < k) {
             throw new IllegalArgumentException("Array is null or not big enough");
         }
 
+        Deque<Integer> window = new ArrayDeque<>(k + 1);
+
+        int index = 0;
+        while (index < k - 1) {
+            window.addLast(input[index]);
+            index++;
+
+            while (window.peekFirst() > window.peekLast()) {
+                window.pollFirst();
+            }
+        }
+
         int outputSize = input.length - k + 1;
-        Integer[] minOfSubarrays = new Integer[outputSize];
-
-        int windowStart = 0;
-        int windowEnd = 0;
-
-        // Add initial elements to Min-Heap (k-1)
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-        while (minHeap.size() < k - 1) {
-            minHeap.add(input[windowEnd++]);
-        }
-
-        // Add an Elem, find Min, and Remove Last Elem
+        Integer[] mins = new Integer[outputSize];
         for (int outputIndex = 0; outputIndex < outputSize; outputIndex++) {
-            minHeap.add(input[windowEnd++]);
-            minOfSubarrays[outputIndex] = minHeap.peek();
-            minHeap.remove(input[windowStart++]);
+            window.addLast(input[index]);
+            index++;
+
+            if (window.size() > k) {
+                window.pollFirst();
+            }
+
+            while (window.peekFirst() > window.peekLast()) {
+                window.pollFirst();
+            }
+
+            mins[outputIndex] = Math.min(window.peekFirst(), window.peekLast());
         }
 
-        return minOfSubarrays;
+        return mins;
     }
 }
