@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -9,7 +10,27 @@ import java.util.Set;
  */
 public class ValidSubstrings {
     public static Set<String> getValidSubstrings(String[] dictionary, String input) {
-        return null;
+        Set<String> output = new HashSet<>();
+        Trie wordLookup = new Trie();
+
+        int maxLength = -1;
+        for (String word : dictionary) {
+            wordLookup.add(word);
+            if (word.length() > maxLength) {
+                maxLength = word.length();
+            }
+        }
+
+        for (int i = 0; i < input.length(); i++) {
+            for (int j = i + 1; j <= input.length() && j - i <= maxLength; j++) {
+                String word = input.substring(i, j);
+                if (wordLookup.contains(word)) {
+                    output.add(word);
+                }
+            }
+        }
+
+        return output;
     }
 }
 
