@@ -25,10 +25,11 @@ public class LongestPalindromeTest {
     @Test
     public void longestPalindrome() throws Exception {
         Assert.assertEquals("aha", LongestPalindrome.longestPalindrome("aha"));
-        Assert.assertEquals("ttaaatt", LongestPalindrome.longestPalindrome("ttaatta"));
-        Set<String> outputSet = new HashSet<>(Arrays.asList("a", "b", "c"));
+        Set<String> outputSet = new HashSet<>(Arrays.asList("tatatat", "ttaaatt", "attatta"));
+        Assert.assertTrue(outputSet.contains(LongestPalindrome.longestPalindrome("ttaatta")));
+        outputSet = new HashSet<>(Arrays.asList("a", "b", "c"));
         Assert.assertTrue(outputSet.contains(LongestPalindrome.longestPalindrome("abc")));
-        outputSet = new HashSet<>(Arrays.asList("gaaag", "aggga"));
+        outputSet = new HashSet<>(Arrays.asList("gaaag", "aggga", "agaga", "gagag"));
         Assert.assertTrue(outputSet.contains(LongestPalindrome.longestPalindrome("gggaaa")));
     }
 }
