@@ -14,7 +14,38 @@
  * The solution here would be 5
  */
 public class WordFit {
+    /**
+     * Given the number of columns, we can pre-calculate how many consecutive
+     * words will fit in any given line given any starting word.
+     */
     public static int numberOfWords(String[] words, int columns, int rows) {
-        return 0;
+        // Pre-calculate word count per column given a starting word
+        Integer[] maxWords = new Integer[words.length];
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].length() <= columns) {
+                int count = 1;
+                int lineSize = words[i].length();
+
+                int j = i + 1;
+                while ((lineSize + words[j % words.length].length() + 1) <= columns) {
+                    count += 1;
+                    lineSize += (words[j % words.length].length() + 1);
+                    j++;
+                }
+
+                maxWords[i] = count;
+            } else {
+                maxWords[i] = 0;
+            }
+        }
+
+        int wordCount = 0;
+        int wordIndex = 0;
+        for (int i = 0; i < rows; i++) {
+            wordCount += maxWords[wordIndex];
+            wordIndex = (wordIndex + maxWords[wordIndex]) % words.length;
+        }
+
+        return wordCount;
     }
 }
