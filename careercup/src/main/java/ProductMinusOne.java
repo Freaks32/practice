@@ -14,6 +14,12 @@
  */
 public class ProductMinusOne {
     public static long productMinusOne(long[] array, int i) {
-        return 0L;
+        long arrayProduct = 1L;
+        for (int k = 0; k < array.length; k++) {
+            if (k != i) {
+                arrayProduct *= array[k];
+            }
+        }
+        return arrayProduct;
     }
 }
