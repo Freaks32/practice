@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +27,42 @@ public class CamelCaseSearch {
         return new CamelCaseSearch(dictionary);
     }
 
+    /**
+     * Simple naive approach
+     */
     public List<String> find(String search) {
-        return null;
+        List<String> output = new ArrayList<>();
+        for (String string : dictionary) {
+            if (checkString(search, string)) {
+                output.add(string);
+            }
+        }
+        return output;
+    }
+
+    private boolean checkString(String pattern, String item) {
+        char[] chars = pattern.toCharArray();
+
+        int itemIndex = 0;
+        for (char character : chars) {
+            if (Character.isUpperCase(character)) {
+                itemIndex = nextUpperIndex(item, itemIndex);
+            }
+            if (itemIndex < 0 || character != item.charAt(itemIndex)) {
+                return false;
+            }
+            itemIndex++;
+        }
+        return true;
+    }
+
+    private int nextUpperIndex(String item, int index) {
+        while (index < item.length() && !Character.isUpperCase(item.charAt(index))) {
+            index++;
+        }
+        if (index >= item.length()) {
+            return -1;
+        }
+        return index;
     }
 }
