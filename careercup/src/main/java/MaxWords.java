@@ -31,6 +31,40 @@ public class MaxWords {
     }
 
     public static int maxCharacters(int[] array, int max) {
-        return 0;
+        if (array.length < 1) {
+            throw new IllegalArgumentException("Invalid Array");
+        }
+        if (max < 0) {
+            throw new IllegalArgumentException("Invalid Maximum");
+        }
+
+        int[][] charCounter = new int[array.length][max + 1];
+        for (int i = 0; i < charCounter.length; i++) {
+            charCounter[i][0] = 0;
+        }
+
+        for (int j = 1; j < charCounter[0].length; j++) {
+            if (j >= array[0]) {
+                charCounter[0][j] = array[0];
+            } else {
+                charCounter[0][j] = 0;
+            }
+        }
+
+        for (int i = 1; i < charCounter.length; i++) {
+            for (int j = 1; j < charCounter[i].length; j++) {
+                int noChoose = charCounter[i - 1][j];
+                int chooseIndex = j - array[i];
+                int choose = (chooseIndex >= 0 ? charCounter[i - 1][chooseIndex] : 0) + array[i];
+
+                if (choose > max) {
+                    charCounter[i][j] = noChoose;
+                } else {
+                    charCounter[i][j] = Math.max(noChoose, choose);
+                }
+            }
+        }
+
+        return charCounter[array.length - 1][max];
     }
 }
