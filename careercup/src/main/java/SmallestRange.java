@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -77,5 +78,12 @@ class Ref {
 
     public int getValue() {
         return value;
+    }
+}
+
+class RefComparator implements Comparator<Ref> {
+    @Override
+    public int compare(Ref o1, Ref o2) {
+        return o1.getValue() - o2.getValue();
     }
 }
