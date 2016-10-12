@@ -1,5 +1,6 @@
 import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * SmallestRange
@@ -16,7 +17,43 @@ import java.util.List;
  */
 public class SmallestRange {
     public static Range<Integer> smallestRange(List<List<Integer>> lists) {
-        return null;
+        Range<Integer> minRange = null;
+        int minSpan = Integer.MAX_VALUE;
+        int maxValue = Integer.MIN_VALUE;
+
+        PriorityQueue<Ref> refQ = new PriorityQueue<>(lists.size(), new RefComparator());
+        for (int i = 0; i < lists.size(); i++) {
+            Integer value = lists.get(i).get(0);
+            refQ.add(new Ref(i, 0, value));
+            maxValue = Math.max(maxValue, value);
+        }
+
+        int minValue = refQ.peek().getValue();
+        int currentSpan = maxValue - minValue;
+        if (currentSpan < minSpan) {
+            minRange = new Range<>(minValue, maxValue);
+            minSpan = currentSpan;
+        }
+
+        Ref toRemove = refQ.poll();
+        while (toRemove.getListIndex() + 1 < lists.get(toRemove.getListId()).size()) {
+            Integer value = lists.get(toRemove.getListId()).get(toRemove.getListIndex() + 1);
+
+            refQ.add(new Ref(toRemove.getListId(), toRemove.getListIndex() + 1, value));
+
+            maxValue = Math.max(maxValue, value);
+            minValue = refQ.peek().getValue();
+            currentSpan = maxValue - minValue;
+
+            if (currentSpan < minSpan) {
+                minRange = new Range<>(minValue, maxValue);
+                minSpan = currentSpan;
+            }
+
+            toRemove = refQ.poll();
+        }
+
+        return minRange;
     }
 }
 
