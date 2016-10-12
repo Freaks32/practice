@@ -27,7 +27,32 @@ public class MaxWords {
     }
 
     public static int maxConsecutiveWords(int[] array, int max) {
-        return 0;
+        if (array.length < 1) {
+            throw new IllegalArgumentException("Invalid Array");
+        }
+        if (max < 0) {
+            throw new IllegalArgumentException("Invalid Maximum");
+        }
+
+        int maxWords = 0;
+        int wordTotal = 0;
+        int characterTotal = 0;
+        int startIndex = 0;
+        for (int endIndex = 0; endIndex < array.length; endIndex++) {
+            characterTotal += array[endIndex];
+            wordTotal += 1;
+
+            while (characterTotal > max) {
+                characterTotal -= array[startIndex++];
+                wordTotal -= 1;
+            }
+
+            if (wordTotal > maxWords) {
+                maxWords = wordTotal;
+            }
+        }
+
+        return maxWords;
     }
 
     public static int maxCharacters(int[] array, int max) {
