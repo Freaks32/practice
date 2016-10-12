@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Max Words Problem
  * https://careercup.com/question?id=5639859738771456
@@ -23,7 +25,20 @@
  */
 public class MaxWords {
     public static int maxWords(int[] array, int max) {
-        return 0;
+        int[] internalArray = Arrays.copyOf(array, array.length);
+        Arrays.sort(internalArray);
+
+        int totalWords = 0;
+        int totalCharacters = 0;
+        int wordIndex = 0;
+
+        while (wordIndex < internalArray.length &&
+                totalCharacters + internalArray[wordIndex] < max) {
+            totalCharacters += internalArray[wordIndex++];
+            totalWords += 1;
+        }
+
+        return totalWords;
     }
 
     public static int maxConsecutiveWords(int[] array, int max) {
