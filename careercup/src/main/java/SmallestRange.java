@@ -55,3 +55,27 @@ class Range<T> {
         return result;
     }
 }
+
+class Ref {
+    private final int listId;
+    private final int listIndex;
+    private final int value;
+
+    public Ref(int listId, int listIndex, int value) {
+        this.listId = listId;
+        this.listIndex = listIndex;
+        this.value = value;
+    }
+
+    public int getListId() {
+        return listId;
+    }
+
+    public int getListIndex() {
+        return listIndex;
+    }
+
+    public int getValue() {
+        return value;
+    }
+}
