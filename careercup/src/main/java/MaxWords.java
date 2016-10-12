@@ -25,4 +25,12 @@ public class MaxWords {
     public static int maxWords(int[] array, int max) {
         return 0;
     }
+
+    public static int maxConsecutiveWords(int[] array, int max) {
+        return 0;
+    }
+
+    public static int maxCharacters(int[] array, int max) {
+        return 0;
+    }
 }
