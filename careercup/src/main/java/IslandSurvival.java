@@ -20,6 +20,8 @@ import java.util.Map;
  */
 public class IslandSurvival {
     private static class IslandSurvivalHelper {
+        private static final char DELIM = '~';
+
         private final int n;
         private final Map<String, Double> probabilityLookup;
 
@@ -33,7 +35,36 @@ public class IslandSurvival {
         }
 
         public double probabilityAlive(int x, int y, int steps) {
-            return 0D;
+            String lookupKey = null;
+            {
+                lookupKey = new StringBuilder(12)
+                        .append(x).append(DELIM)
+                        .append(y).append(DELIM)
+                        .append(steps)
+                        .toString();
+            }
+            // Use cached value if possible
+            if (probabilityLookup.containsKey(lookupKey)) {
+                return probabilityLookup.get(lookupKey);
+            }
+
+            // Falling off the side
+            if (x < 0 || x >= n || y < 0 || y >= n) {
+                return 0D;
+            }
+            // Ended in a safe spot
+            if (steps <= 0) {
+                return 1D;
+            }
+
+            // Calculate probability alive and cache it
+            double probabilityAlive = 0.25D * probabilityAlive(x - 1, y, steps - 1) +
+                    0.25D * probabilityAlive(x + 1, y, steps - 1) +
+                    0.25D * probabilityAlive(x, y - 1, steps - 1) +
+                    0.25D * probabilityAlive(x, y + 1, steps - 1);
+            probabilityLookup.put(lookupKey, probabilityAlive);
+
+            return probabilityAlive;
         }
     }
 
