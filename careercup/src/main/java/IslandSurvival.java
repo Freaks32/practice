@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * IslandSurvival
  * https://careercup.com/question?id=15556758
@@ -16,7 +19,25 @@
  * float probabilityofalive(int x,int y, int n)
  */
 public class IslandSurvival {
+    private static class IslandSurvivalHelper {
+        private final int n;
+        private final Map<String, Double> probabilityLookup;
+
+        public IslandSurvivalHelper(int n) {
+            this.n = n;
+            this.probabilityLookup = new HashMap<>();
+        }
+
+        public double probabilityAlive(int x, int y) {
+            return probabilityAlive(x, y, n);
+        }
+
+        public double probabilityAlive(int x, int y, int steps) {
+            return 0D;
+        }
+    }
+
     public static double probabilityAlive(int x, int y, int n) {
-        return 0D;
+        return new IslandSurvivalHelper(n).probabilityAlive(x, y);
     }
 }
