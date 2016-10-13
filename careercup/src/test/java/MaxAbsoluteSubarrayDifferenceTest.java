@@ -8,7 +8,7 @@ public class MaxAbsoluteSubarrayDifferenceTest {
     @Test
     public void maxAbsoluteSubarrayDifference() throws Exception {
         Assert.assertEquals(16, MaxAbsoluteSubarrayDifference.maxAbsoluteSubarrayDifference(
-                new int[]{2, -1, -2, -4, 2, 8}
+                new int[]{2, -1, -2, 1, -4, 2, 8}
         ));
         Assert.assertEquals(10, MaxAbsoluteSubarrayDifference.maxAbsoluteSubarrayDifference(
                 new int[]{4, -1, 7}
