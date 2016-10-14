@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * GuardDistance
  * https://careercup.com/question?id=4716965625069568
@@ -21,7 +24,20 @@ public class GuardDistance {
     public static final int UNMARKED = 0;
 
     public static int[][] minGuardDistances(int[][] array) {
+        Queue<Position> positionQueue = getGuardQueue(array);
         return null;
+    }
+
+    private static Queue<Position> getGuardQueue(int[][] array) {
+        Queue<Position> guardPositions = new LinkedList<>();
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                if (array[i][j] == GUARD) {
+                    guardPositions.add(new Position(i, j));
+                }
+            }
+        }
+        return guardPositions;
     }
 
     private static class Position {
