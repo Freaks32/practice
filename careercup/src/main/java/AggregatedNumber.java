@@ -17,6 +17,34 @@
  */
 public class AggregatedNumber {
     public static boolean isAggregatedNumber(String input) {
+        for (int i = 1; i <= input.length() / 3; i++) {
+            for (int j = i + 1; j <= input.length() * 2 / 3; j++) {
+                int first = Integer.parseInt(input.substring(0, i));
+                int second = Integer.parseInt(input.substring(i, j));
+
+                if (checkSequence(input, first, second, j)) {
+                    return true;
+                }
+            }
+        }
         return false;
+    }
+
+    private static boolean checkSequence(String input, int first, int second, int index) {
+        if (index >= input.length()) {
+            return true;
+        }
+
+        int result = first + second;
+        String expectedString = String.valueOf(result);
+
+        int indexEnd = Math.min(index + expectedString.length(), input.length());
+        String actualString = input.substring(index, indexEnd);
+
+        if (expectedString.equals(actualString)) {
+            return checkSequence(input, second, result, index + expectedString.length());
+        } else {
+            return false;
+        }
     }
 }
