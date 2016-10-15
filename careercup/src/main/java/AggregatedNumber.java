@@ -16,7 +16,7 @@
  * so can you provide a function to check whether this number is aggregated number or not?
  */
 public class AggregatedNumber {
-    public boolean isAggregatedNumber(String input) {
+    public static boolean isAggregatedNumber(String input) {
         return false;
     }
 }
