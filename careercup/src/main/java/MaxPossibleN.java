@@ -10,7 +10,7 @@
  * Google Applications Developer
  */
 public class MaxPossibleN {
-    public int maxPossibleN(int[] array) {
+    public static int maxPossibleN(int[] array) {
         return 0;
     }
 }
