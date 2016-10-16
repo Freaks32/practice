@@ -8,6 +8,25 @@
  */
 public class MaxPossibleN {
     public static int maxPossibleN(int[] array) {
-        return 0;
+        int[] histogram = new int[array.length + 1];
+
+        for (int value : array) {
+            if (value < 0) {
+                throw new IllegalArgumentException("Assumption not met: No negative numbers");
+            } else if (value >= histogram.length) {
+                histogram[histogram.length - 1] += 1;
+            } else {
+                histogram[value] += 1;
+            }
+        }
+
+        int runningCount = 0;
+        for (int i = histogram.length - 1; i >= 0; i--) {
+            runningCount += histogram[i];
+            if (runningCount >= i) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
