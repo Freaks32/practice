@@ -13,7 +13,7 @@
  * The catch is when checking a query all lamps adjacent to, or on,…
  */
 public class LampGrid {
-    public static boolean[] squaresLit(Coord[] lamps, Coord[] locations) {
+    public static boolean[] squaresLit(int N, Coord[] lamps, Coord[] locations) {
         return null;
     }
 }
