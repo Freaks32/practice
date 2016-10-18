@@ -14,7 +14,14 @@
  */
 public class LampGrid {
     public static boolean[] squaresLit(int N, Coord[] lamps, Coord[] locations) {
-        return null;
+        boolean[] output = new boolean[locations.length];
+
+        LampGridHelper lampGridHelper = new LampGridHelper(N, lamps);
+        for (int i = 0; i < locations.length; i++) {
+            output[i] = lampGridHelper.isCoordinateLit(locations[i]);
+        }
+
+        return output;
     }
 
     private static class LampGridHelper {
