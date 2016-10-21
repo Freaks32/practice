@@ -20,18 +20,38 @@ import java.util.List;
  * By calling next repeatedly until hasNext returns false, the order of elements returned by next should be: [1,4,6].
  */
 class NestedIterator implements Iterator<Integer> {
-    public NestedIterator(List<NestedInteger> nestedList) {
+    NestedIterator subIterator;
+    int index;
+    List<NestedInteger> nestedList;
 
+    public NestedIterator(List<NestedInteger> nestedList) {
+        this.index = 0;
+        this.nestedList = nestedList;
     }
 
     @Override
     public Integer next() {
+        if (subIterator != null) {
+            if (subIterator.hasNext()) {
+                return subIterator.next();
+            } else {
+                subIterator = null;
+            }
+        }
 
+        NestedInteger value = nestedList.get(index++);
+        if (value.isInteger()) {
+            return value.getInteger();
+        } else {
+            subIterator = new NestedIterator(value.getList());
+            return next();
+        }
     }
 
     @Override
     public boolean hasNext() {
-
+        // If there is a subiterator present or haven't finished iterating on list
+        return (subIterator != null && subIterator.hasNext()) || index < nestedList.size();
     }
 }
 
