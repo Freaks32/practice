@@ -11,5 +11,25 @@
  */
 public class SortColors {
     public void sortColors(int[] nums) {
+        // Bucket Sort due to limited domain
+        int[] buckets = new int[3];
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 2 || nums[0] < 0) {
+                throw new IllegalArgumentException("Value out of range");
+            }
+            buckets[nums[i]]++;
+        }
+
+        int index = 0;
+        int indexOut = 0;
+        while (index < buckets.length) {
+            if (buckets[index] > 0) {
+                buckets[index]--;
+                nums[indexOut++] = index;
+            } else {
+                index++;
+            }
+        }
     }
 }
